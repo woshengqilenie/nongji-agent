@@ -1,0 +1,68 @@
+:root {
+  --ag-primary: #d97706;
+  --ag-primary-hover: #b45309;
+  --ag-primary-light: #fef3c7;
+  --ag-crop-green: #3b7a57;
+  --ag-crop-green-light: #e8f5e9;
+  --ag-machine-blue: #2d5b7b;
+  --ag-machine-blue-light: #ebf3f8;
+  --ag-risk-red: #c2410c;
+  --ag-risk-red-light: #fdf2f2;
+  --ag-bg-base: #f8f7f4;
+  --ag-bg-card: #ffffff;
+  --ag-text-primary: #2b2521;
+  --ag-text-secondary: #5c5854;
+  --ag-border-color: #e3dfd9;
+  --ag-divider-color: #eceae4;
+  --ag-radius-sm: 6px;
+  --ag-radius-md: 8px;
+  --ag-radius-lg: 12px;
+  --ag-shadow-sm: 0 1px 2px rgba(43, 37, 33, 0.05);
+  --ag-shadow-md: 0 4px 12px rgba(43, 37, 33, 0.04), 0 1px 2px rgba(43, 37, 33, 0.02);
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Microsoft YaHei", sans-serif;
+  --font-mono: "Roboto Mono", "DIN Alternate", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--ag-bg-base);
+  color: var(--ag-text-primary);
+  font-family: var(--font-sans);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.text-muted {
+  color: var(--ag-text-secondary);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.hidden {
+  display: none !important;
+}

@@ -1,0 +1,251 @@
+.ag-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.ag-header {
+  min-height: 60px;
+  background: var(--ag-bg-card);
+  border-bottom: 1px solid var(--ag-border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo-area,
+.operator-area,
+.nav-tabs,
+.panel-title,
+.legend-item,
+.toolbar,
+.card-header,
+.card-footer,
+.candidate-header,
+.field-row {
+  display: flex;
+  align-items: center;
+}
+
+.logo-area {
+  gap: 10px;
+  min-width: 240px;
+}
+
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  background: var(--ag-primary);
+  border-radius: var(--ag-radius-sm);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.logo-title {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.nav-tabs {
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav-tab {
+  padding: 8px 14px;
+  border-radius: var(--ag-radius-md);
+  color: var(--ag-text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nav-tab.active {
+  background: var(--ag-primary-light);
+  color: var(--ag-primary-hover);
+}
+
+.nav-tab:hover:not(.active) {
+  background: var(--ag-bg-base);
+  color: var(--ag-text-primary);
+}
+
+.operator-area {
+  justify-content: flex-end;
+  gap: 10px;
+  min-width: 240px;
+  color: var(--ag-text-secondary);
+  font-size: 13px;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ag-machine-blue-light);
+  color: var(--ag-machine-blue);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.ag-main {
+  flex: 1;
+  min-height: 0;
+}
+
+.workbench-grid {
+  display: grid;
+  grid-template-columns: 360px minmax(520px, 1fr) 400px;
+}
+
+.sidebar {
+  background: var(--ag-bg-card);
+  border-right: 1px solid var(--ag-border-color);
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 60px);
+}
+
+.sidebar-right {
+  border-right: 0;
+  border-left: 1px solid var(--ag-border-color);
+}
+
+.panel-header {
+  padding: 16px;
+  border-bottom: 1px solid var(--ag-divider-color);
+  background: var(--ag-bg-card);
+}
+
+.panel-title {
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.panel-subtitle {
+  margin: 6px 0 0;
+  color: var(--ag-text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.scroll-stack {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: auto;
+}
+
+.right-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow: auto;
+}
+
+.landing-shell {
+  width: min(1180px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 34px 0 48px;
+}
+
+.landing-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.landing-panel {
+  border: 1px solid var(--ag-border-color);
+  border-radius: var(--ag-radius-lg);
+  background: var(--ag-bg-card);
+  box-shadow: var(--ag-shadow-md);
+  padding: 24px;
+}
+
+.hero-title {
+  margin: 14px 0 12px;
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.hero-copy {
+  margin: 0;
+  color: var(--ag-text-secondary);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+@media (max-width: 1180px) {
+  .workbench-grid {
+    grid-template-columns: 320px 1fr;
+  }
+
+  .sidebar-right {
+    grid-column: 1 / -1;
+    border-left: 0;
+    border-top: 1px solid var(--ag-border-color);
+    min-height: auto;
+  }
+
+  .portal-grid,
+  .landing-hero {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .ag-header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 14px;
+  }
+
+  .logo-area,
+  .operator-area {
+    min-width: 0;
+  }
+
+  .workbench-grid,
+  .landing-hero,
+  .portal-grid {
+    display: block;
+  }
+
+  .sidebar,
+  .map-container {
+    min-height: auto;
+  }
+
+  .map-container {
+    height: 520px;
+  }
+
+  .landing-panel,
+  .portal-card {
+    margin-bottom: 14px;
+  }
+}

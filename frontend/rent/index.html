@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>租赁端 | 农机速配调度平台</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand-block">
+          <div class="brand-mark">租</div>
+          <div class="brand-copy">
+            <h2>租赁端</h2>
+            <p>像点外卖一样挑选农机服务，右侧直接下单并跟踪履约进度</p>
+          </div>
+        </div>
+        <nav class="header-nav">
+          <a class="nav-pill" href="../">总览</a>
+          <a class="nav-pill active" href="./">租赁端</a>
+          <a class="nav-pill" href="../machine">农机端</a>
+          <a class="nav-pill" href="../supervisor">主管端</a>
+          <a class="nav-pill" href="../atlas">全域地图</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero-card">
+        <span class="eyebrow">Agriculture-as-a-service</span>
+        <h1 class="hero-title">农忙时节不等人，像点外卖一样下单农机服务</h1>
+        <p class="hero-subtitle">
+          这里展示的是租赁端视角：选品类、挑机主、看评分、输入田块要求后直接下单。
+          右侧会实时显示你的订单轨迹，后续可切到主管端和农机端继续完成整条链路演示。
+        </p>
+        <div class="inline-actions">
+          <span class="hint-chip">支持收割 / 播种 / 耕整 / 植保</span>
+          <span class="hint-chip">支持一句话填单</span>
+          <span class="hint-chip">下单后可直接托管支付</span>
+        </div>
+      </section>
+
+      <section class="page-grid market" style="margin-top: 22px;">
+        <aside class="panel sidebar-stack">
+          <div>
+            <h3>服务品类</h3>
+            <p class="section-note">按农忙场景筛选当前可售服务。</p>
+          </div>
+          <div id="categoryList" class="category-list"></div>
+          <div class="section-divider"></div>
+          <div class="detail-stack">
+            <h3>一句话填单</h3>
+            <label class="field">
+              <span>智能需求描述</span>
+              <textarea id="quickDemandText" placeholder="例如：明天上午收割 220 亩小麦，预算 15000，要求损失率小于 2%"></textarea>
+            </label>
+            <button id="parseDemandBtn" class="btn warning">智能解析并填充表单</button>
+            <div id="parseResult" class="result-box"><pre>这里会显示解析后的结构化结果</pre></div>
+          </div>
+        </aside>
+
+        <section class="panel section-stack">
+          <div class="panel-head">
+            <div>
+              <h3>服务列表</h3>
+              <p class="section-note">选中任意服务卡片后，右侧将自动带出快速下单信息。</p>
+            </div>
+            <div class="toolbar" id="serviceToolbar"></div>
+          </div>
+          <div id="serviceList" class="list-stack"></div>
+          <div id="servicePagination" class="pagination-bar"></div>
+        </section>
+
+        <aside class="panel detail-stack">
+          <div>
+            <h3>快速下单</h3>
+            <p class="section-note">当前演示默认以平台托管支付方式进入履约流转。</p>
+          </div>
+          <div id="selectedServiceBox" class="note-box">请选择一个服务卡片。</div>
+          <label class="field">
+            <span>当前租赁方</span>
+            <select id="buyerSelect"></select>
+          </label>
+          <div class="field-grid">
+            <label class="field">
+              <span>作业面积（亩）</span>
+              <input id="areaInput" type="number" min="1" value="180" />
+            </label>
+            <label class="field">
+              <span>紧急程度</span>
+              <select id="urgencySelect">
+                <option value="high">加急</option>
+                <option value="medium" selected>常规</option>
+                <option value="low">普通</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>预计开工时间</span>
+              <input id="scheduleStartInput" type="datetime-local" />
+            </label>
+            <label class="field">
+              <span>经度</span>
+              <input id="lngInput" type="number" step="0.000001" value="119.328600" />
+            </label>
+            <label class="field">
+              <span>纬度</span>
+              <input id="latInput" type="number" step="0.000001" value="36.551100" />
+            </label>
+          </div>
+          <p class="section-note">经纬度统一按 WGS84 输入，页面会自动转换成高德地图坐标展示。</p>
+          <label class="field">
+            <span>作业要求 / 地块备注</span>
+            <textarea id="requirementInput" placeholder="例如：小麦抢收，靠近村道，收割损失率 &lt;= 2%，下午 5 点前进场。"></textarea>
+          </label>
+          <div class="inline-actions">
+            <button id="createPayBtn" class="btn primary">创建并托管支付</button>
+            <button id="refreshOrdersBtn" class="btn secondary">刷新我的订单</button>
+          </div>
+          <div id="orderActionHint" class="note-box">下单成功后，这里会显示结果摘要。</div>
+          <div class="section-divider"></div>
+          <div>
+            <h3>AI 下单助理</h3>
+            <p class="section-note">结合所选服务、地块天气和订单状态，给出下单提醒与履约建议。</p>
+          </div>
+          <div class="inline-actions">
+            <button id="rentAiExplainBtn" class="btn warning">生成 AI 建议</button>
+          </div>
+          <div id="rentAiInsight" class="result-box insight-box"><pre>点击按钮后，这里会显示大模型建议。</pre></div>
+          <div>
+            <h3>地块地图</h3>
+            <div class="map-shell compact">
+              <div class="map-tools">
+                <button id="rentMapFullscreenBtn" class="btn secondary" type="button">全屏地图</button>
+              </div>
+              <div id="rentMapCanvas" class="map-canvas compact"></div>
+              <div id="rentMapPlaceholder" class="map-placeholder">请先在右上角“外部服务设置”里配置高德地图 Key。</div>
+            </div>
+          </div>
+          <div>
+            <h3>天气与地块提示</h3>
+            <div id="rentWeatherPanel" class="weather-box"><pre>填写地块坐标或选择订单后，可查看天气预览。</pre></div>
+          </div>
+          <div class="section-divider"></div>
+          <div>
+            <h3>我的订单</h3>
+            <p class="section-note">点击订单卡可查看详细轨迹；订单进入“待验收”后，可在下方详情区点击“确认验收”。</p>
+          </div>
+          <div id="myOrders" class="list-stack"></div>
+          <div id="orderPagination" class="pagination-bar"></div>
+          <div id="orderDetail" class="detail-stack"></div>
+        </aside>
+      </section>
+    </main>
+
+    <script type="module" src="../rent.js"></script>
+  </body>
+</html>

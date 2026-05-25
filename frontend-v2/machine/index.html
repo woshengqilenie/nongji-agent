@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>农机端 v2 | 农机速配调度平台</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/legacy-compat.css" />
+  </head>
+  <body>
+    <div class="ag-app">
+      <header class="ag-header">
+        <div class="logo-area"><div class="logo-icon">机</div><span class="logo-title">农机端 v2</span></div>
+        <nav class="nav-tabs header-nav">
+          <a class="nav-tab" href="../">总览</a><a class="nav-tab" href="../rent/">租赁端</a><a class="nav-tab active" href="./">农机端</a><a class="nav-tab" href="../supervisor/">主管端</a><a class="nav-tab" href="../atlas/">全域地图</a><a class="nav-tab" href="/ui/machine">旧版</a>
+        </nav>
+        <div class="operator-area"><span>麦浪网格风</span><span class="avatar">机</span></div>
+      </header>
+      <main class="page-shell">
+        <section class="page-grid machine">
+          <aside class="panel sidebar-stack">
+            <div><h3>当前机主</h3></div>
+            <label class="field"><span>机主身份</span><select id="ownerSelect"></select></label>
+            <div id="machineMetrics" class="metric-grid"></div>
+            <div class="section-divider"></div>
+            <div class="section-stack">
+              <div class="panel-head"><h3>任务分组</h3><button id="refreshOwnerBtn" class="btn secondary">刷新工作台</button></div>
+              <div id="groupTabs" class="toolbar"></div>
+              <div id="groupOrders" class="list-stack"></div>
+            </div>
+          </aside>
+          <section class="panel detail-stack">
+            <div class="panel-head"><div><h3>任务详情</h3></div></div>
+            <div id="selectedOrderSummary" class="note-box">请选择左侧任务卡片。</div>
+            <div id="selectedOrderTimeline"></div>
+            <div id="selectedOrderMeta" class="note-box">暂无选中任务。</div>
+          </section>
+          <aside class="panel detail-stack">
+            <div><h3>机手动作</h3></div>
+            <div><h3>AI 接单建议</h3></div>
+            <div class="inline-actions"><button id="machineAiAdviceBtn" class="btn warning">生成 AI 建议</button></div>
+            <div id="machineAiInsight" class="result-box insight-box"><pre>点击按钮后，这里会显示大模型建议。</pre></div>
+            <label class="field"><span>备注 / 拒单原因 / 故障说明</span><textarea id="machineNoteInput" placeholder="例如：当前机具正在保养，建议改派；或 15:00 后可接单。"></textarea></label>
+            <label class="field"><span>建议改约时间窗</span><input id="proposedWindowInput" type="text" placeholder="例如：今天 15:00 后可接单，明天上午优先" /></label>
+            <div class="inline-actions"><button id="acceptBtn" class="btn primary">确认接单</button><button id="departBtn" class="btn secondary">机手出发</button><button id="startBtn" class="btn secondary">开始作业</button><button id="finishBtn" class="btn secondary">提交完工</button></div>
+            <div class="inline-actions"><button id="rejectBtn" class="btn warning">拒单回流</button><button id="rescheduleBtn" class="btn warning">申请改约</button><button id="faultBtn" class="btn danger">上报故障</button></div>
+            <div id="machineActionResult" class="result-box"><pre>动作结果会显示在这里</pre></div>
+            <div><h3>GPS 作业核算</h3><div id="gpsWorkbenchPanel" class="gps-workbench note-box"><div class="gps-status">点击“开始作业”后生成模拟 GPS 轨迹。</div></div></div>
+          </aside>
+        </section>
+        <section class="panel detail-stack" style="margin-top: 16px">
+          <div class="panel-head">
+            <div><h3>任务地图</h3></div>
+          </div>
+          <div class="map-shell compact">
+            <div class="map-tools"><button id="machineMapFullscreenBtn" class="btn secondary" type="button">全屏地图</button></div>
+            <div id="machineMapCanvas" class="map-canvas compact"></div>
+            <div id="machineMapPlaceholder" class="map-placeholder">请先在右上角“外部服务设置”里配置高德地图 Key。</div>
+          </div>
+          <div><h3>天气与履约提示</h3><div id="machineWeatherPanel" class="weather-box"><pre>选择任务后可查看目的地天气与当前机具天气对比。</pre></div></div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/ui/machine.js"></script>
+  </body>
+</html>

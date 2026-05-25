@@ -1,0 +1,249 @@
+{
+  "meta": {
+    "version": "1.3",
+    "generated_at": "2026-04-24T16:20:00+08:00",
+    "note": "Seed data narrowed to real places around Weifang urban area, Shouguang, Changle, Changyi and Anqiu with real administrative names and public map coordinates."
+  },
+  "users": [
+    {"id": 1, "role": "buyer", "name": "鲁丰麦田合作社", "phone": "13800000001", "rating": 4.6, "region": "山东省潍坊市坊子区黄旗堡街道"},
+    {"id": 2, "role": "buyer", "name": "纪台丰禾农场", "phone": "13800000002", "rating": 4.5, "region": "山东省潍坊市寿光市纪台镇"},
+    {"id": 3, "role": "buyer", "name": "乔官火山农业合作社", "phone": "13800000003", "rating": 4.8, "region": "山东省潍坊市昌乐县乔官镇"},
+    {"id": 4, "role": "buyer", "name": "饮马农服站", "phone": "13800000004", "rating": 4.4, "region": "山东省潍坊市昌邑市饮马镇"},
+    {"id": 5, "role": "buyer", "name": "景芝粮棉合作社", "phone": "13800000005", "rating": 4.3, "region": "山东省潍坊市安丘市景芝镇"},
+
+    {"id": 11, "role": "owner", "name": "机主-王强", "phone": "13900000011", "rating": 4.7, "region": "山东省潍坊市潍城区于河街道"},
+    {"id": 12, "role": "owner", "name": "机主-李海", "phone": "13900000012", "rating": 4.5, "region": "山东省潍坊市寒亭区朱里街道"},
+    {"id": 13, "role": "owner", "name": "机主-赵峰", "phone": "13900000013", "rating": 4.6, "region": "山东省潍坊市坊子区黄旗堡街道"},
+    {"id": 14, "role": "owner", "name": "机主-孙波", "phone": "13900000014", "rating": 4.5, "region": "山东省潍坊市寿光市稻田镇"},
+    {"id": 15, "role": "owner", "name": "机主-刘凯", "phone": "13900000015", "rating": 4.4, "region": "山东省潍坊市昌乐县宝都街道"},
+    {"id": 16, "role": "owner", "name": "机主-高林", "phone": "13900000016", "rating": 4.6, "region": "山东省潍坊市昌乐县五图街道"},
+    {"id": 17, "role": "owner", "name": "机主-马腾", "phone": "13900000017", "rating": 4.3, "region": "山东省潍坊市昌邑市饮马镇"},
+    {"id": 18, "role": "owner", "name": "机主-韩松", "phone": "13900000018", "rating": 4.5, "region": "山东省潍坊市坊子区凤凰街道"},
+    {"id": 19, "role": "owner", "name": "机主-程远", "phone": "13900000019", "rating": 4.7, "region": "山东省潍坊市安丘市景芝镇"},
+    {"id": 20, "role": "owner", "name": "机主-许川", "phone": "13900000020", "rating": 4.4, "region": "山东省潍坊市安丘市官庄镇"},
+
+    {"id": 21, "role": "dispatcher", "name": "调度员-陈晨", "phone": "13700000021", "rating": 4.9, "region": "平台运营中心"},
+    {"id": 22, "role": "dispatcher", "name": "调度员-周敏", "phone": "13700000022", "rating": 4.8, "region": "平台运营中心"},
+    {"id": 99, "role": "admin", "name": "管理员", "phone": "13600000099", "rating": 5.0, "region": "平台运营中心"}
+  ],
+  "machines": [
+    {"id": 1001, "owner_id": 11, "machine_type": "联合收割机", "capacity_mu_per_hour": 18, "lng": 119.03202, "lat": 36.75289, "status": "idle", "health_score": 92},
+    {"id": 1002, "owner_id": 12, "machine_type": "播种机", "capacity_mu_per_hour": 22, "lng": 119.383726, "lat": 36.736039, "status": "busy", "health_score": 88},
+    {"id": 1003, "owner_id": 13, "machine_type": "联合收割机", "capacity_mu_per_hour": 17, "lng": 119.27057, "lat": 36.71293, "status": "idle", "health_score": 90},
+    {"id": 1004, "owner_id": 14, "machine_type": "播种机", "capacity_mu_per_hour": 24, "lng": 118.91491, "lat": 36.82923, "status": "idle", "health_score": 86},
+    {"id": 1005, "owner_id": 15, "machine_type": "拖拉机", "capacity_mu_per_hour": 15, "lng": 118.805588, "lat": 36.705628, "status": "idle", "health_score": 95},
+    {"id": 1006, "owner_id": 16, "machine_type": "联合收割机", "capacity_mu_per_hour": 18, "lng": 118.84829, "lat": 36.70428, "status": "idle", "health_score": 87},
+    {"id": 1007, "owner_id": 17, "machine_type": "植保机", "capacity_mu_per_hour": 30, "lng": 119.51304, "lat": 36.7113, "status": "idle", "health_score": 84},
+    {"id": 1008, "owner_id": 18, "machine_type": "拖拉机", "capacity_mu_per_hour": 16, "lng": 119.16197, "lat": 36.65223, "status": "busy", "health_score": 83},
+    {"id": 1009, "owner_id": 19, "machine_type": "联合收割机", "capacity_mu_per_hour": 19, "lng": 119.399432, "lat": 36.320202, "status": "idle", "health_score": 91},
+    {"id": 1010, "owner_id": 20, "machine_type": "植保机", "capacity_mu_per_hour": 32, "lng": 119.20236, "lat": 36.26197, "status": "idle", "health_score": 89}
+  ],
+  "service_skus": [
+    {"id": 2001, "owner_id": 11, "machine_id": 1001, "work_type": "收割", "title": "潍城小麦联合收割服务", "unit": "亩", "unit_price": 68, "radius_km": 35, "min_area": 80},
+    {"id": 2002, "owner_id": 12, "machine_id": 1002, "work_type": "播种", "title": "寒亭玉米精量播种服务", "unit": "亩", "unit_price": 52, "radius_km": 28, "min_area": 50},
+    {"id": 2003, "owner_id": 13, "machine_id": 1003, "work_type": "收割", "title": "坊子应急联合收割服务", "unit": "亩", "unit_price": 66, "radius_km": 30, "min_area": 70},
+    {"id": 2004, "owner_id": 14, "machine_id": 1004, "work_type": "播种", "title": "寿光春玉米播种服务", "unit": "亩", "unit_price": 50, "radius_km": 32, "min_area": 60},
+    {"id": 2005, "owner_id": 15, "machine_id": 1005, "work_type": "耕地", "title": "昌乐深耕整地服务", "unit": "亩", "unit_price": 47, "radius_km": 26, "min_area": 70},
+    {"id": 2006, "owner_id": 16, "machine_id": 1006, "work_type": "收割", "title": "昌乐火山地联合收割服务", "unit": "亩", "unit_price": 64, "radius_km": 38, "min_area": 90},
+    {"id": 2007, "owner_id": 17, "machine_id": 1007, "work_type": "植保", "title": "昌邑飞防植保服务", "unit": "亩", "unit_price": 29, "radius_km": 30, "min_area": 45},
+    {"id": 2008, "owner_id": 18, "machine_id": 1008, "work_type": "耕地", "title": "坊子旋耕平地服务", "unit": "亩", "unit_price": 45, "radius_km": 24, "min_area": 65},
+    {"id": 2009, "owner_id": 19, "machine_id": 1009, "work_type": "收割", "title": "安丘跨区联合收割服务", "unit": "亩", "unit_price": 65, "radius_km": 40, "min_area": 100},
+    {"id": 2010, "owner_id": 20, "machine_id": 1010, "work_type": "植保", "title": "安丘果蔬植保服务", "unit": "亩", "unit_price": 31, "radius_km": 28, "min_area": 40}
+  ],
+  "orders": [
+    {
+      "id": 3001,
+      "order_no": "OD202604240001",
+      "buyer_id": 1,
+      "sku_id": 2003,
+      "machine_id": 1003,
+      "area_mu": 280,
+      "amount": 18480,
+      "status": "IN_SERVICE",
+      "schedule_start": "2026-04-24T07:30:00+08:00",
+      "schedule_end": "2026-04-24T18:00:00+08:00",
+      "urgency_level": "high",
+      "quality_constraints": "收割损失率<=2%",
+      "target_lng": 119.35057,
+      "target_lat": 36.59287
+    },
+    {
+      "id": 3002,
+      "order_no": "OD202604240002",
+      "buyer_id": 5,
+      "sku_id": 2009,
+      "machine_id": 1009,
+      "area_mu": 260,
+      "amount": 16900,
+      "status": "ABNORMAL_PENDING",
+      "schedule_start": "2026-04-24T08:00:00+08:00",
+      "schedule_end": "2026-04-24T17:00:00+08:00",
+      "urgency_level": "high",
+      "quality_constraints": "到场延迟<=30分钟",
+      "target_lng": 119.399432,
+      "target_lat": 36.320202
+    },
+    {
+      "id": 3003,
+      "order_no": "OD202604240003",
+      "buyer_id": 3,
+      "sku_id": 2006,
+      "machine_id": null,
+      "area_mu": 180,
+      "amount": 11520,
+      "status": "DISPATCH_PROPOSED",
+      "schedule_start": "2026-04-25T07:00:00+08:00",
+      "schedule_end": "2026-04-25T15:00:00+08:00",
+      "urgency_level": "medium",
+      "quality_constraints": "秸秆粉碎率>=90%",
+      "target_lng": 118.88938,
+      "target_lat": 36.57954
+    },
+    {
+      "id": 3004,
+      "order_no": "OD202604240004",
+      "buyer_id": 4,
+      "sku_id": 2005,
+      "machine_id": 1005,
+      "area_mu": 120,
+      "amount": 5640,
+      "status": "COMPLETED",
+      "schedule_start": "2026-04-23T09:00:00+08:00",
+      "schedule_end": "2026-04-23T14:30:00+08:00",
+      "urgency_level": "low",
+      "quality_constraints": "耕深>=25cm",
+      "target_lng": 119.467088,
+      "target_lat": 36.732347
+    },
+    {
+      "id": 3005,
+      "order_no": "OD202604240005",
+      "buyer_id": 2,
+      "sku_id": 2001,
+      "machine_id": null,
+      "area_mu": 220,
+      "amount": 14960,
+      "status": "PAID_ESCROW",
+      "schedule_start": "2026-04-25T06:30:00+08:00",
+      "schedule_end": "2026-04-25T16:30:00+08:00",
+      "urgency_level": "high",
+      "quality_constraints": "收割损失率<=2.2%",
+      "target_lng": 118.786407,
+      "target_lat": 36.782328
+    },
+    {
+      "id": 3006,
+      "order_no": "OD202604240006",
+      "buyer_id": 4,
+      "sku_id": 2007,
+      "machine_id": 1007,
+      "area_mu": 230,
+      "amount": 6670,
+      "status": "REASSIGN_PROPOSED",
+      "schedule_start": "2026-04-25T08:00:00+08:00",
+      "schedule_end": "2026-04-25T19:00:00+08:00",
+      "urgency_level": "high",
+      "quality_constraints": "药液覆盖均匀，漏喷率<=3%",
+      "target_lng": 119.57918,
+      "target_lat": 36.70682
+    },
+    {
+      "id": 3007,
+      "order_no": "OD202604240007",
+      "buyer_id": 3,
+      "sku_id": 2004,
+      "machine_id": 1004,
+      "area_mu": 140,
+      "amount": 7000,
+      "status": "TO_CONFIRM",
+      "schedule_start": "2026-04-26T07:20:00+08:00",
+      "schedule_end": "2026-04-26T12:30:00+08:00",
+      "urgency_level": "medium",
+      "quality_constraints": "漏播率<=3%",
+      "target_lng": 118.84829,
+      "target_lat": 36.70428
+    },
+    {
+      "id": 3008,
+      "order_no": "OD202604240008",
+      "buyer_id": 2,
+      "sku_id": 2002,
+      "machine_id": 1002,
+      "area_mu": 160,
+      "amount": 8320,
+      "status": "DISPATCH_CONFIRMED",
+      "schedule_start": "2026-04-26T08:30:00+08:00",
+      "schedule_end": "2026-04-26T18:00:00+08:00",
+      "urgency_level": "medium",
+      "quality_constraints": "播深一致，行距误差<=5cm",
+      "target_lng": 118.90325,
+      "target_lat": 36.83634
+    }
+  ],
+  "dispatch_logs": [
+    {
+      "id": 4001,
+      "order_id": 3001,
+      "agent": "DispatchAgent",
+      "selected_machine_id": 1003,
+      "score_breakdown": {"distance": 94, "availability": 95, "reputation": 92, "price": 84, "total": 90.6},
+      "reason": "黄旗堡同街道到场，距离近、对地块熟悉、履约稳定。",
+      "need_human_approval": true,
+      "approval_status": "approved"
+    },
+    {
+      "id": 4002,
+      "order_id": 3002,
+      "agent": "ExceptionAgent",
+      "selected_machine_id": null,
+      "score_breakdown": {"weather": 96, "distance": 0, "availability": 0, "reputation": 0, "total": 0},
+      "reason": "景芝镇当前天气风险高，强对流窗口未过，先暂停等待更安全的作业时窗。",
+      "need_human_approval": true,
+      "approval_status": "pending"
+    },
+    {
+      "id": 4003,
+      "order_id": 3005,
+      "agent": "DispatchAgent",
+      "selected_machine_id": 1006,
+      "score_breakdown": {"distance": 86, "availability": 100, "reputation": 90, "price": 83, "total": 89.8},
+      "reason": "昌乐五图机组空闲，跨县距离和预计到场时间均在可接受范围。",
+      "need_human_approval": true,
+      "approval_status": "pending"
+    },
+    {
+      "id": 4004,
+      "order_id": 3006,
+      "agent": "ExceptionAgent",
+      "selected_machine_id": 1010,
+      "score_breakdown": {"distance": 72, "availability": 96, "reputation": 90, "price": 82, "total": 84.5},
+      "reason": "饮马原机上报喷杆故障，安丘官庄备援植保机可作为替补机具。",
+      "need_human_approval": true,
+      "approval_status": "pending"
+    }
+  ],
+  "telemetry_stream": [
+    {"machine_id": 1003, "ts": "2026-04-24T08:10:00+08:00", "speed_kmh": 9.1, "engine_temp": 83, "fuel_rate": 14.2, "status": "normal"},
+    {"machine_id": 1003, "ts": "2026-04-24T08:20:00+08:00", "speed_kmh": 8.6, "engine_temp": 85, "fuel_rate": 14.6, "status": "normal"},
+    {"machine_id": 1009, "ts": "2026-04-24T09:05:00+08:00", "speed_kmh": 5.0, "engine_temp": 98, "fuel_rate": 21.2, "status": "warning"},
+    {"machine_id": 1009, "ts": "2026-04-24T09:12:00+08:00", "speed_kmh": 1.8, "engine_temp": 106, "fuel_rate": 24.1, "status": "critical"},
+    {"machine_id": 1004, "ts": "2026-04-26T09:10:00+08:00", "speed_kmh": 7.5, "engine_temp": 80, "fuel_rate": 11.4, "status": "normal"},
+    {"machine_id": 1007, "ts": "2026-04-25T08:40:00+08:00", "speed_kmh": 6.3, "engine_temp": 92, "fuel_rate": 18.9, "status": "warning"}
+  ],
+  "weather_alerts": [
+    {"id": 5001, "region": "山东省潍坊市安丘市景芝镇", "level": "orange", "type": "暴雨", "start": "2026-04-24T09:30:00+08:00", "end": "2026-04-24T12:00:00+08:00"},
+    {"id": 5002, "region": "山东省潍坊市昌邑市饮马镇", "level": "yellow", "type": "大风", "start": "2026-04-25T14:00:00+08:00", "end": "2026-04-25T18:00:00+08:00"},
+    {"id": 5003, "region": "山东省潍坊市寿光市纪台镇", "level": "blue", "type": "雷阵雨", "start": "2026-04-25T13:00:00+08:00", "end": "2026-04-25T16:30:00+08:00"}
+  ],
+  "reviews": [
+    {"id": 6001, "order_id": 3004, "buyer_id": 4, "owner_id": 15, "rating": 5, "content": "饮马这块地整得平，耕深达标，机手也准时。"}
+  ],
+  "scenario_flags": {
+    "enable_fault_injection": true,
+    "enable_weather_interrupt": true,
+    "enable_timeout_case": true,
+    "fault_injection_ratio": 0.1,
+    "weather_interrupt_ratio": 0.08,
+    "timeout_ratio": 0.05
+  }
+}

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>农机速配调度平台 v2</title>
+    <link rel="stylesheet" href="./css/theme.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/components.css" />
+  </head>
+  <body>
+    <div class="ag-app">
+      <header class="ag-header">
+        <div class="logo-area">
+          <div class="logo-icon">丰</div>
+          <span class="logo-title">农机速配调度平台 v2</span>
+        </div>
+        <nav class="nav-tabs header-nav">
+          <a class="nav-tab active" href="./">总览</a>
+          <a class="nav-tab" href="./rent/">租赁端</a>
+          <a class="nav-tab" href="./machine/">农机端</a>
+          <a class="nav-tab" href="./supervisor/">主管调度端</a>
+          <a class="nav-tab" href="./atlas/">全域地图</a>
+          <a class="nav-tab" href="../ui/">返回旧版</a>
+        </nav>
+        <div class="operator-area">
+          <span>麦浪网格风</span>
+          <span class="avatar">V2</span>
+        </div>
+      </header>
+
+      <main class="landing-shell">
+        <section class="landing-panel">
+          <span class="eyebrow">调度流程</span>
+          <h1 class="hero-title">三条链路讲清楚农机服务平台怎么运转</h1>
+          <p class="hero-copy">
+            从租赁端下单开始，主管端负责派单和异常处置，农机端回传接单与作业动作，全域地图用于补充空间态势。
+          </p>
+        </section>
+
+        <section class="portal-grid">
+          <a class="portal-card" href="./rent/">
+            <span class="eyebrow">Flow 01</span>
+            <h3>普通履约流程</h3>
+            <p>租赁端选择服务或用一句话填单，创建订单并托管支付；主管端生成派单建议并确认派单；农机端接单、出发、开工、完工；租赁端最后确认验收，订单闭环完成。</p>
+          </a>
+          <a class="portal-card" href="./supervisor/">
+            <span class="eyebrow">Flow 02</span>
+            <h3>故障改派流程</h3>
+            <p>农机端在履约中上报故障；订单回流到主管端异常池；主管端点击故障改派建议，查看候选机具评分和路线；确认替补机具后，新的机主在农机端继续接单履约。</p>
+          </a>
+          <a class="portal-card" href="./supervisor/">
+            <span class="eyebrow">Flow 03</span>
+            <h3>目的地暴雨流程</h3>
+            <p>主管端选择订单后模拟目的地暴雨；天气面板显示风险升高；点击天气自动处置，系统给出暂停、改派或观察建议；主管可恢复继续作业，也可取消并退款。</p>
+          </a>
+          <a class="portal-card" href="./atlas/">
+            <span class="eyebrow">Map</span>
+            <h3>全域态势补充</h3>
+            <p>用全域地图统一查看农机点位、订单地块、服务覆盖圈、调度线路和天气预警，适合在三条流程之间切换讲平台全貌。</p>
+          </a>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="./js/platform-settings.js"></script>
+  </body>
+</html>

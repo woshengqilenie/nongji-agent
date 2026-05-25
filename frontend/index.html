@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>农机速配调度平台</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand-block">
+          <div class="brand-mark">丰</div>
+          <div class="brand-copy">
+            <h1>农机速配调度平台</h1>
+            <p>像点外卖一样下单农机服务，像调度中台一样处理履约与异常</p>
+          </div>
+        </div>
+        <nav class="header-nav">
+          <a class="nav-pill active" href="./">总览</a>
+          <a class="nav-pill" href="./rent">租赁端</a>
+          <a class="nav-pill" href="./machine">农机端</a>
+          <a class="nav-pill" href="./supervisor">主管端</a>
+          <a class="nav-pill" href="./atlas">全域地图</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero-card">
+        <span class="eyebrow">Agent + 算法协同调度</span>
+        <h2 class="hero-title">从单页原型升级而来，是一套三端联动的农机服务平台</h2>
+        <p class="hero-subtitle">
+          租赁端负责下单与跟踪，农机端负责接单、拒单、改约和作业回传，主管端负责算法派单、异常处置、运营总控与复盘。
+          我们保留了天气暂停和故障改派两条核心异常链路，让整套故事更接近真实平台。
+        </p>
+        <div class="stats-row">
+          <div class="landing-highlight metric-card">
+            <div class="metric-label">四类标准品类</div>
+            <div class="metric-value">收 / 播 / 耕 / 保</div>
+            <div class="metric-desc">收割、播种、耕整、植保四类服务全部围绕真实农机履约场景设计</div>
+          </div>
+          <div class="landing-highlight metric-card">
+            <div class="metric-label">双异常闭环</div>
+            <div class="metric-value">天气 + 故障</div>
+            <div class="metric-desc">不是只展示正常派单，而是能暂停、改派、恢复和退款</div>
+          </div>
+          <div class="landing-highlight metric-card">
+            <div class="metric-label">算法可解释</div>
+            <div class="metric-value">距离 / 机况 / 时效</div>
+            <div class="metric-desc">主管端可看到候选机组评分，不再只是黑盒推荐</div>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <a class="btn primary" href="./rent">进入租赁端</a>
+          <a class="btn secondary" href="./machine">进入农机端</a>
+          <a class="btn secondary" href="./supervisor">进入主管端</a>
+          <a class="btn secondary" href="./atlas">进入全域地图</a>
+        </div>
+      </section>
+
+      <section class="landing-grid" style="margin-top: 22px;">
+        <article class="portal-card">
+          <span class="eyebrow">Rent</span>
+          <h3>租赁端像外卖首页</h3>
+          <p>按品类浏览服务，查看机主评分、预计响应时间、历史完成率，右侧快速下单并实时跟踪订单状态。</p>
+          <div class="tag-row">
+            <span class="tag">像点外卖一样下单</span>
+            <span class="tag">支持一句话填单</span>
+            <span class="tag">订单轨迹可视化</span>
+          </div>
+          <a class="btn primary" href="./rent">打开租赁端</a>
+        </article>
+
+        <article class="portal-card">
+          <span class="eyebrow">Machine</span>
+          <h3>农机端像机手工作台</h3>
+          <p>机主可以接单、拒单、申请改约、出发、开工、完工，还能直接上报故障，让履约动作变得真实可讲。</p>
+          <div class="tag-row">
+            <span class="tag">接单 / 拒单 / 改约</span>
+            <span class="tag">出发 / 开工 / 完工</span>
+            <span class="tag">故障即时上报</span>
+          </div>
+          <a class="btn primary" href="./machine">打开农机端</a>
+        </article>
+
+        <article class="portal-card">
+          <span class="eyebrow">Supervisor</span>
+          <h3>主管端像调度总控台</h3>
+          <p>主管端不只看订单列表，还能看区域热度、机主服务分、候选评分明细和异常订单池，像真正的平台运营总台。</p>
+          <div class="tag-row">
+            <span class="tag">算法派单</span>
+            <span class="tag">天气处置</span>
+            <span class="tag">故障改派</span>
+          </div>
+          <a class="btn primary" href="./supervisor">打开主管端</a>
+        </article>
+
+        <article class="portal-card">
+          <span class="eyebrow">Atlas</span>
+          <h3>全域地图一次看全局</h3>
+          <p>把农机、订单地块、服务覆盖圈、调度线路和天气预警统一叠在一张地图上，适合从空间视角讲平台全貌。</p>
+          <div class="tag-row">
+            <span class="tag">农机点位</span>
+            <span class="tag">地块范围</span>
+            <span class="tag">预警态势</span>
+          </div>
+          <a class="btn primary" href="./atlas">打开全域地图</a>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

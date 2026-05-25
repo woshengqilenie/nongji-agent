@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>农机端 | 农机速配调度平台</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand-block">
+          <div class="brand-mark">机</div>
+          <div class="brand-copy">
+            <h2>农机端</h2>
+            <p>机主 / 机手工作台，负责接单、拒单、改约、出发、开工、完工与故障上报</p>
+          </div>
+        </div>
+        <nav class="header-nav">
+          <a class="nav-pill" href="../">总览</a>
+          <a class="nav-pill" href="../rent">租赁端</a>
+          <a class="nav-pill active" href="./">农机端</a>
+          <a class="nav-pill" href="../supervisor">主管端</a>
+          <a class="nav-pill" href="../atlas">全域地图</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero-card">
+        <span class="eyebrow">Machine Workbench</span>
+        <h1 class="hero-title">像机手工作台一样处理履约动作，而不是只看一条订单状态</h1>
+        <p class="hero-subtitle">
+          农机端保留真实平台常见动作：接单、拒单、申请改约、出发、开始作业、完工和故障上报。
+          这样主管端才能真正看到订单回流、异常触发和改派闭环。
+        </p>
+      </section>
+
+      <section class="page-grid machine" style="margin-top: 22px;">
+        <aside class="panel sidebar-stack">
+          <div>
+            <h3>当前机主</h3>
+            <p class="section-note">切换不同机主，可看到分配给各自机具的订单池。</p>
+          </div>
+          <label class="field">
+            <span>机主身份</span>
+            <select id="ownerSelect"></select>
+          </label>
+          <div id="machineMetrics" class="metric-grid"></div>
+          <div class="section-divider"></div>
+          <div class="section-stack">
+            <div class="panel-head">
+              <h3>任务分组</h3>
+              <button id="refreshOwnerBtn" class="btn secondary">刷新工作台</button>
+            </div>
+            <div id="groupTabs" class="toolbar"></div>
+            <div id="groupOrders" class="list-stack"></div>
+          </div>
+        </aside>
+
+        <section class="panel detail-stack">
+          <div class="panel-head">
+            <div>
+              <h3>任务详情</h3>
+              <p class="section-note">选中左侧订单后，这里会展示当前履约阶段、田块信息和事件轨迹。</p>
+            </div>
+          </div>
+          <div id="selectedOrderSummary" class="note-box">请选择左侧任务卡片。</div>
+          <div id="selectedOrderTimeline"></div>
+          <div id="selectedOrderMeta" class="note-box">暂无选中任务。</div>
+          <div>
+            <h3>任务地图</h3>
+            <div class="map-shell compact">
+              <div class="map-tools">
+                <button id="machineMapFullscreenBtn" class="btn secondary" type="button">全屏地图</button>
+              </div>
+              <div id="machineMapCanvas" class="map-canvas compact"></div>
+              <div id="machineMapPlaceholder" class="map-placeholder">请先在右上角“外部服务设置”里配置高德地图 Key。</div>
+            </div>
+          </div>
+          <div>
+            <h3>天气与履约提示</h3>
+            <div id="machineWeatherPanel" class="weather-box"><pre>选择任务后可查看目的地天气与当前机具天气对比。</pre></div>
+          </div>
+        </section>
+
+        <aside class="panel detail-stack">
+          <div>
+            <h3>机手动作</h3>
+            <p class="section-note">这里的动作会直接影响主管端订单池，例如拒单或改约会让订单回流。</p>
+          </div>
+          <div>
+            <h3>AI 接单建议</h3>
+            <p class="section-note">结合天气、时窗和当前阶段，辅助判断接单、改约或故障处置动作。</p>
+          </div>
+          <div class="inline-actions">
+            <button id="machineAiAdviceBtn" class="btn warning">生成 AI 建议</button>
+          </div>
+          <div id="machineAiInsight" class="result-box insight-box"><pre>点击按钮后，这里会显示大模型建议。</pre></div>
+          <label class="field">
+            <span>备注 / 拒单原因 / 故障说明</span>
+            <textarea id="machineNoteInput" placeholder="例如：当前机具正在保养，建议改派；或 15:00 后可接单。"></textarea>
+          </label>
+          <label class="field">
+            <span>建议改约时间窗</span>
+            <input id="proposedWindowInput" type="text" placeholder="例如：今天 15:00 后可接单，明天上午优先" />
+          </label>
+          <div class="inline-actions">
+            <button id="acceptBtn" class="btn primary">确认接单</button>
+            <button id="departBtn" class="btn secondary">机手出发</button>
+            <button id="startBtn" class="btn secondary">开始作业</button>
+            <button id="finishBtn" class="btn secondary">提交完工</button>
+          </div>
+          <div class="inline-actions">
+            <button id="rejectBtn" class="btn warning">拒单回流</button>
+            <button id="rescheduleBtn" class="btn warning">申请改约</button>
+            <button id="faultBtn" class="btn danger">上报故障</button>
+          </div>
+          <div id="machineActionResult" class="result-box"><pre>动作结果会显示在这里</pre></div>
+          <div>
+            <h3>GPS 作业核算</h3>
+            <div id="gpsWorkbenchPanel" class="gps-workbench note-box">
+              <div class="gps-status">点击“开始作业”后生成模拟 GPS 轨迹。</div>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script type="module" src="../machine.js"></script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>全域地图 v2 | 农机速配调度平台</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/legacy-compat.css" />
+  </head>
+  <body>
+    <div class="ag-app">
+      <header class="ag-header">
+        <div class="logo-area"><div class="logo-icon">图</div><span class="logo-title">全域地图 v2</span></div>
+        <nav class="nav-tabs header-nav">
+          <a class="nav-tab" href="../">总览</a><a class="nav-tab" href="../rent/">租赁端</a><a class="nav-tab" href="../machine/">农机端</a><a class="nav-tab" href="../supervisor/">主管端</a><a class="nav-tab active" href="./">全域地图</a><a class="nav-tab" href="/ui/atlas">旧版</a>
+        </nav>
+        <div class="operator-area"><span>麦浪网格风</span><span class="avatar">图</span></div>
+      </header>
+      <main class="page-shell">
+        <section class="hero-card">
+          <span class="eyebrow">Map Atlas</span>
+          <h1 class="hero-title">一次看清平台里的全部空间数据</h1>
+          <p class="hero-subtitle">把农机位置、订单地块、服务覆盖圈、当前调度线路和天气预警点铺在同一张地图上。</p>
+        </section>
+        <section class="page-grid atlas" style="margin-top: 16px">
+          <aside class="panel sidebar-stack">
+            <div><h3>地图指标</h3><p class="section-note">显示当前筛选条件下还能看到多少农机、地块和线路。</p></div>
+            <div id="atlasMetrics" class="metric-grid"></div>
+            <div class="section-divider"></div>
+            <div class="section-stack">
+              <div><h3>筛选器</h3><p class="section-note">支持按区域、作业类型、订单状态和关键词收缩地图内容。</p></div>
+              <label class="field"><span>区域</span><select id="atlasRegionFilter"></select></label>
+              <label class="field"><span>作业类型</span><select id="atlasWorkTypeFilter"></select></label>
+              <label class="field"><span>订单状态</span><select id="atlasStatusFilter"></select></label>
+              <label class="field"><span>关键词</span><input id="atlasKeywordInput" type="text" placeholder="搜索乡镇、机主、订单号或农机类型" /></label>
+            </div>
+            <div class="section-divider"></div>
+            <div class="section-stack">
+              <div><h3>地图图层</h3><p class="section-note">可单独关闭覆盖圈或线路，避免画面太满。</p></div>
+              <label class="toggle-row"><input id="atlasLayerMachines" type="checkbox" checked /><span>显示农机点位</span></label>
+              <label class="toggle-row"><input id="atlasLayerFields" type="checkbox" checked /><span>显示订单地块</span></label>
+              <label class="toggle-row"><input id="atlasLayerCoverage" type="checkbox" checked /><span>显示服务覆盖圈</span></label>
+              <label class="toggle-row"><input id="atlasLayerRoutes" type="checkbox" checked /><span>显示调度线路</span></label>
+              <label class="toggle-row"><input id="atlasLayerAlerts" type="checkbox" checked /><span>显示天气预警点</span></label>
+            </div>
+            <div class="inline-actions"><button id="atlasRefreshBtn" class="btn primary" type="button">刷新地图数据</button><button id="atlasResetBtn" class="btn secondary" type="button">重置筛选</button></div>
+            <div class="section-divider"></div>
+            <div><h3>选中详情</h3><p class="section-note">点击地图上的任意对象后，这里会显示对应说明。</p></div>
+            <div id="atlasSelectionBox" class="detail-stack"></div>
+          </aside>
+          <section class="panel detail-stack">
+            <div class="panel-head"><div><h3>全域数据地图</h3><p class="section-note">同一张地图里同时展示空间位置、业务状态和运营风险。</p></div><span id="atlasVisibleSummary" class="hint-chip">正在加载地图摘要...</span></div>
+            <div class="atlas-legend"><span class="atlas-legend-chip harvest">收割 / 耕整 / 播种 / 植保按不同颜色区分</span><span class="atlas-legend-chip route">实线偏履约，虚线偏待派单或异常</span><span class="atlas-legend-chip alert">红橙黄蓝点表示天气预警等级</span></div>
+            <div class="map-shell atlas-shell">
+              <div class="map-tools"><button id="atlasMapFitBtn" class="btn secondary" type="button">适配全部数据</button><button id="atlasMapFullscreenBtn" class="btn secondary" type="button">全屏地图</button></div>
+              <div id="atlasMapCanvas" class="map-canvas atlas-canvas"></div>
+              <div id="atlasMapPlaceholder" class="map-placeholder">请先在右上角“外部服务设置”里配置高德地图 Key。</div>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/ui/atlas.js"></script>
+  </body>
+</html>

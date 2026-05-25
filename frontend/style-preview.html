@@ -1,0 +1,1095 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>农机速配调度平台 - 麦浪网格风预览</title>
+    <style>
+      :root {
+        --ag-primary: #d97706;
+        --ag-primary-hover: #b45309;
+        --ag-primary-light: #fef3c7;
+        --ag-crop-green: #3b7a57;
+        --ag-crop-green-light: #e8f5e9;
+        --ag-machine-blue: #2d5b7b;
+        --ag-machine-blue-light: #ebf3f8;
+        --ag-risk-red: #c2410c;
+        --ag-risk-red-light: #fdf2f2;
+        --ag-bg-base: #f8f7f4;
+        --ag-bg-card: #ffffff;
+        --ag-text-primary: #2b2521;
+        --ag-text-secondary: #5c5854;
+        --ag-border-color: #e3dfd9;
+        --ag-divider-color: #eceae4;
+        --ag-radius-sm: 6px;
+        --ag-radius-md: 8px;
+        --ag-radius-lg: 12px;
+        --ag-shadow-sm: 0 1px 2px rgba(43, 37, 33, 0.05);
+        --ag-shadow-md: 0 4px 12px rgba(43, 37, 33, 0.04), 0 1px 2px rgba(43, 37, 33, 0.02);
+        --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Microsoft YaHei", sans-serif;
+        --font-mono: "Roboto Mono", "DIN Alternate", ui-monospace, monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        background: var(--ag-bg-base);
+        color: var(--ag-text-primary);
+        font-family: var(--font-sans);
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .ag-app {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .ag-header {
+        height: 60px;
+        background: var(--ag-bg-card);
+        border-bottom: 1px solid var(--ag-border-color);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 0 24px;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .logo-area,
+      .operator-area,
+      .nav-tabs,
+      .panel-title,
+      .legend-item,
+      .toolbar {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-area {
+        gap: 10px;
+        min-width: 240px;
+      }
+
+      .logo-icon {
+        width: 28px;
+        height: 28px;
+        background: var(--ag-primary);
+        border-radius: var(--ag-radius-sm);
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-weight: 800;
+        font-size: 14px;
+      }
+
+      .logo-title {
+        font-size: 16px;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      .nav-tabs {
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .nav-tab {
+        padding: 8px 14px;
+        border-radius: var(--ag-radius-md);
+        color: var(--ag-text-secondary);
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .nav-tab.active {
+        background: var(--ag-primary-light);
+        color: var(--ag-primary-hover);
+      }
+
+      .nav-tab:hover:not(.active) {
+        background: var(--ag-bg-base);
+        color: var(--ag-text-primary);
+      }
+
+      .operator-area {
+        justify-content: flex-end;
+        gap: 10px;
+        min-width: 240px;
+        font-size: 13px;
+        color: var(--ag-text-secondary);
+      }
+
+      .avatar {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--ag-machine-blue-light);
+        color: var(--ag-machine-blue);
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+      }
+
+      .ag-main {
+        flex: 1;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 360px minmax(520px, 1fr) 400px;
+      }
+
+      .sidebar {
+        background: var(--ag-bg-card);
+        border-right: 1px solid var(--ag-border-color);
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 60px);
+      }
+
+      .sidebar-right {
+        border-right: 0;
+        border-left: 1px solid var(--ag-border-color);
+      }
+
+      .panel-header {
+        padding: 16px;
+        border-bottom: 1px solid var(--ag-divider-color);
+        background: var(--ag-bg-card);
+      }
+
+      .panel-title {
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 15px;
+        font-weight: 800;
+      }
+
+      .panel-subtitle {
+        margin: 6px 0 0;
+        color: var(--ag-text-secondary);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .count-pill {
+        color: var(--ag-primary-hover);
+        background: var(--ag-primary-light);
+        border-radius: 999px;
+        padding: 3px 8px;
+        font: 700 12px var(--font-mono);
+      }
+
+      .order-list,
+      .right-content {
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow: auto;
+      }
+
+      .right-content {
+        padding: 16px;
+        gap: 18px;
+      }
+
+      .order-card,
+      .candidate-card,
+      .metric-card,
+      .info-card,
+      .weather-card {
+        border: 1px solid var(--ag-border-color);
+        border-radius: var(--ag-radius-md);
+        background: var(--ag-bg-card);
+      }
+
+      .order-card {
+        padding: 14px 14px 14px 18px;
+        cursor: pointer;
+        transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        position: relative;
+      }
+
+      .order-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 12px;
+        bottom: 12px;
+        width: 4px;
+        border-radius: 0 4px 4px 0;
+        background: var(--ag-border-color);
+      }
+
+      .order-card.status-pending::before {
+        background: var(--ag-primary);
+      }
+
+      .order-card.status-active::before {
+        background: var(--ag-crop-green);
+      }
+
+      .order-card.status-risk::before {
+        background: var(--ag-risk-red);
+      }
+
+      .order-card:hover {
+        border-color: #b8afa4;
+        box-shadow: var(--ag-shadow-sm);
+      }
+
+      .order-card.selected {
+        border-color: var(--ag-primary);
+        background: #faf9f5;
+        box-shadow: var(--ag-shadow-md);
+      }
+
+      .card-header,
+      .card-footer,
+      .candidate-header,
+      .field-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .card-header {
+        margin-bottom: 8px;
+      }
+
+      .crop-badge,
+      .score-tag,
+      .status-chip {
+        border-radius: 4px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .crop-badge {
+        font-size: 11px;
+        padding: 3px 7px;
+      }
+
+      .badge-pending {
+        color: var(--ag-primary-hover);
+        background: var(--ag-primary-light);
+      }
+
+      .badge-active {
+        color: var(--ag-crop-green);
+        background: var(--ag-crop-green-light);
+      }
+
+      .badge-risk {
+        color: var(--ag-risk-red);
+        background: var(--ag-risk-red-light);
+      }
+
+      .area-info,
+      .metric-value,
+      .score-tag {
+        font-family: var(--font-mono);
+      }
+
+      .area-info {
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .card-body {
+        color: var(--ag-text-secondary);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .card-body strong {
+        display: block;
+        color: var(--ag-text-primary);
+        margin-bottom: 4px;
+        font-size: 14px;
+      }
+
+      .card-footer {
+        margin-top: 10px;
+        padding-top: 9px;
+        border-top: 1px dashed var(--ag-divider-color);
+        color: var(--ag-text-secondary);
+        font-size: 11px;
+      }
+
+      .map-container {
+        position: relative;
+        min-height: calc(100vh - 60px);
+        overflow: hidden;
+        background-color: var(--ag-bg-base);
+        background-image:
+          linear-gradient(to right, var(--ag-divider-color) 1px, transparent 1px),
+          linear-gradient(to bottom, var(--ag-divider-color) 1px, transparent 1px);
+        background-size: 30px 30px;
+      }
+
+      .map-topbar {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        right: 16px;
+        z-index: 3;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .map-search,
+      .map-filter {
+        border: 1px solid var(--ag-border-color);
+        border-radius: var(--ag-radius-md);
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: var(--ag-shadow-sm);
+      }
+
+      .map-search {
+        min-width: 280px;
+        padding: 10px 12px;
+        color: var(--ag-text-secondary);
+        font-size: 13px;
+      }
+
+      .map-filter {
+        display: flex;
+        gap: 8px;
+        padding: 8px;
+      }
+
+      .filter-btn {
+        border: 0;
+        border-radius: var(--ag-radius-sm);
+        background: transparent;
+        color: var(--ag-text-secondary);
+        padding: 7px 10px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .filter-btn.active {
+        color: #fff;
+        background: var(--ag-machine-blue);
+      }
+
+      .map-plot {
+        position: absolute;
+        border: 1.5px dashed var(--ag-crop-green);
+        background: rgba(59, 122, 87, 0.04);
+        border-radius: var(--ag-radius-sm);
+        display: grid;
+        place-items: center;
+        padding: 8px;
+        color: var(--ag-crop-green);
+        font-size: 11px;
+        font-weight: 800;
+        text-align: center;
+        transition: border-color 0.25s, background 0.25s, color 0.25s, transform 0.25s;
+      }
+
+      .map-plot.active {
+        border: 2px solid var(--ag-primary);
+        background: rgba(217, 119, 6, 0.1);
+        color: var(--ag-primary-hover);
+        transform: translateY(-2px);
+      }
+
+      .map-marker {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        background: var(--ag-machine-blue);
+        border: 2px solid #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: var(--ag-shadow-md);
+        display: grid;
+        place-items: center;
+      }
+
+      .map-marker::after {
+        content: "";
+        width: 6px;
+        height: 6px;
+        background: #fff;
+        border-radius: 50%;
+      }
+
+      .map-marker.working {
+        background: var(--ag-primary);
+        animation: pulse 2s infinite;
+      }
+
+      .map-marker.risk {
+        background: var(--ag-risk-red);
+      }
+
+      .route-line {
+        position: absolute;
+        height: 3px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(217, 119, 6, 0.1), var(--ag-primary));
+        transform-origin: left center;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.55);
+        }
+        70% {
+          box-shadow: 0 0 0 8px rgba(217, 119, 6, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(217, 119, 6, 0);
+        }
+      }
+
+      .map-legend {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        background: rgba(255, 255, 255, 0.94);
+        border: 1px solid var(--ag-border-color);
+        padding: 10px 14px;
+        border-radius: var(--ag-radius-md);
+        box-shadow: var(--ag-shadow-sm);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        color: var(--ag-text-secondary);
+        font-size: 12px;
+      }
+
+      .legend-item {
+        gap: 6px;
+      }
+
+      .legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .floating-panel {
+        position: absolute;
+        right: 18px;
+        bottom: 20px;
+        width: 260px;
+        padding: 14px;
+        border: 1px solid var(--ag-border-color);
+        border-radius: var(--ag-radius-md);
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: var(--ag-shadow-md);
+      }
+
+      .floating-panel h3 {
+        margin: 0 0 8px;
+        font-size: 13px;
+      }
+
+      .floating-panel p {
+        margin: 0;
+        color: var(--ag-text-secondary);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .metric-card {
+        padding: 12px;
+        background: var(--ag-bg-base);
+      }
+
+      .metric-label {
+        margin-bottom: 4px;
+        color: var(--ag-text-secondary);
+        font-size: 11px;
+      }
+
+      .metric-value {
+        font-size: 20px;
+        font-weight: 800;
+      }
+
+      .candidate-card,
+      .weather-card,
+      .info-card {
+        padding: 14px;
+      }
+
+      .candidate-card {
+        display: grid;
+        gap: 10px;
+      }
+
+      .score-tag {
+        color: var(--ag-crop-green);
+        background: var(--ag-crop-green-light);
+        padding: 3px 8px;
+        font-size: 14px;
+      }
+
+      .device-block {
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--ag-divider-color);
+      }
+
+      .device-block strong {
+        display: block;
+        font-size: 14px;
+      }
+
+      .device-block span,
+      .reason-list,
+      .weather-card p,
+      .info-card p {
+        color: var(--ag-text-secondary);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .reason-list {
+        display: grid;
+        gap: 4px;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        border: 0;
+        border-radius: var(--ag-radius-sm);
+        padding: 10px 12px;
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.2s;
+      }
+
+      .btn-primary {
+        width: 100%;
+        background: var(--ag-primary);
+        color: #fff;
+      }
+
+      .btn-primary:hover {
+        background: var(--ag-primary-hover);
+      }
+
+      .btn-secondary {
+        background: var(--ag-bg-base);
+        color: var(--ag-text-primary);
+        border: 1px solid var(--ag-border-color);
+      }
+
+      .btn-primary:active,
+      .btn-secondary:active {
+        transform: scale(0.98);
+      }
+
+      .toolbar {
+        gap: 8px;
+      }
+
+      .status-chip {
+        padding: 4px 7px;
+        font-size: 11px;
+      }
+
+      .weather-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .weather-stat {
+        border: 1px solid var(--ag-divider-color);
+        border-radius: var(--ag-radius-sm);
+        padding: 8px;
+        background: #fff;
+      }
+
+      .weather-stat strong {
+        display: block;
+        font: 800 15px var(--font-mono);
+      }
+
+      .weather-stat span {
+        color: var(--ag-text-secondary);
+        font-size: 11px;
+      }
+
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding-left: 10px;
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-left: 16px;
+        color: var(--ag-text-secondary);
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 5px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--ag-border-color);
+      }
+
+      .timeline-item.active::before {
+        background: var(--ag-primary);
+      }
+
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        left: 2px;
+        top: 15px;
+        bottom: -10px;
+        width: 2px;
+        background: var(--ag-divider-color);
+      }
+
+      .timeline-item:last-child::after {
+        display: none;
+      }
+
+      .field-row {
+        color: var(--ag-text-secondary);
+        font-size: 12px;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--ag-divider-color);
+      }
+
+      .field-row:last-child {
+        border-bottom: 0;
+      }
+
+      .field-row strong {
+        color: var(--ag-text-primary);
+      }
+
+      @media (max-width: 1180px) {
+        .ag-main {
+          grid-template-columns: 320px 1fr;
+        }
+
+        .sidebar-right {
+          grid-column: 1 / -1;
+          border-left: 0;
+          border-top: 1px solid var(--ag-border-color);
+          min-height: auto;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .ag-header {
+          height: auto;
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 14px;
+        }
+
+        .logo-area,
+        .operator-area {
+          min-width: 0;
+        }
+
+        .ag-main {
+          display: block;
+        }
+
+        .sidebar,
+        .map-container {
+          min-height: auto;
+        }
+
+        .map-container {
+          height: 520px;
+        }
+
+        .map-topbar {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ag-app">
+      <header class="ag-header">
+        <div class="logo-area">
+          <div class="logo-icon">丰</div>
+          <span class="logo-title">农机速配调度平台</span>
+        </div>
+        <nav class="nav-tabs">
+          <a href="./" class="nav-tab">总览</a>
+          <a href="./rent" class="nav-tab">租赁端</a>
+          <a href="./machine" class="nav-tab">农机端</a>
+          <a href="./supervisor" class="nav-tab active">主管调度端</a>
+          <a href="./atlas" class="nav-tab">全域地图</a>
+        </nav>
+        <div class="operator-area">
+          <span>区域主管：李建国</span>
+          <span class="avatar">李</span>
+        </div>
+      </header>
+
+      <main class="ag-main">
+        <section class="sidebar">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>待处理订单</span>
+              <span class="count-pill">3</span>
+            </div>
+            <p class="panel-subtitle">按异常、待派单、履约优先级处理订单。</p>
+          </div>
+
+          <div class="order-list">
+            <article class="order-card status-pending selected" data-order="1">
+              <div class="card-header">
+                <span class="crop-badge badge-pending">待派单</span>
+                <span class="area-info">350 亩</span>
+              </div>
+              <div class="card-body">
+                <strong>小麦抢收需求</strong>
+                <span>河北衡水冀州区 · 张大爷农田</span>
+              </div>
+              <div class="card-footer">
+                <span>时限：3 天内</span>
+                <span>50 元/亩</span>
+              </div>
+            </article>
+
+            <article class="order-card status-active" data-order="2">
+              <div class="card-header">
+                <span class="crop-badge badge-active">履约中</span>
+                <span class="area-info">120 亩</span>
+              </div>
+              <div class="card-body">
+                <strong>玉米收割作业</strong>
+                <span>山东德州临邑县 · 老刘合作社</span>
+              </div>
+              <div class="card-footer">
+                <span>机手已到场</span>
+                <span>55 元/亩</span>
+              </div>
+            </article>
+
+            <article class="order-card status-risk" data-order="3">
+              <div class="card-header">
+                <span class="crop-badge badge-risk">异常回流</span>
+                <span class="area-info">500 亩</span>
+              </div>
+              <div class="card-body">
+                <strong>水稻无人机植保</strong>
+                <span>河南新乡辉县 · 绿源示范田</span>
+              </div>
+              <div class="card-footer">
+                <span style="color: var(--ag-risk-red)">设备信号丢失 20 分钟</span>
+                <span>8 元/亩</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="map-container">
+          <div class="map-topbar">
+            <div class="map-search">搜索地块、订单、农机或机主</div>
+            <div class="map-filter">
+              <button class="filter-btn active" type="button">农机</button>
+              <button class="filter-btn active" type="button">地块</button>
+              <button class="filter-btn" type="button">天气</button>
+              <button class="filter-btn active" type="button">线路</button>
+            </div>
+          </div>
+
+          <div class="route-line" style="left: 21%; top: 32%; width: 180px; transform: rotate(18deg)"></div>
+          <div class="route-line" style="left: 48%; top: 57%; width: 150px; transform: rotate(-24deg); background: linear-gradient(90deg, rgba(45, 91, 123, 0.1), var(--ag-machine-blue))"></div>
+
+          <div id="plot-1" class="map-plot active" style="width: 148px; height: 104px; left: 15%; top: 25%">
+            衡水张大爷田<br />350亩
+          </div>
+          <div id="plot-2" class="map-plot" style="width: 110px; height: 82px; left: 56%; top: 45%">
+            德州老刘社<br />120亩
+          </div>
+          <div id="plot-3" class="map-plot" style="width: 180px; height: 120px; left: 31%; top: 63%">
+            新乡示范田<br />500亩
+          </div>
+
+          <div class="map-marker working" style="left: 22%; top: 32%" title="雷沃重工收割机"></div>
+          <div class="map-marker" style="left: 63%; top: 50%" title="久保田收割机"></div>
+          <div class="map-marker risk" style="left: 42%; top: 69%" title="极飞植保无人机"></div>
+
+          <div class="floating-panel">
+            <h3>地图态势摘要</h3>
+            <p>当前可见 42 台农机、18 块订单地块、7 条履约线路。冀州区存在高优先级抢收需求，建议优先确认派单。</p>
+          </div>
+
+          <div class="map-legend">
+            <div class="legend-item">
+              <span class="legend-dot" style="background: var(--ag-primary)"></span>
+              <span>待派单地块</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot" style="background: var(--ag-crop-green)"></span>
+              <span>履约地块</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot" style="background: var(--ag-machine-blue)"></span>
+              <span>在线农机</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot" style="background: var(--ag-risk-red)"></span>
+              <span>异常风险</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar sidebar-right">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>调度控制台</span>
+              <span class="count-pill">AI 已就绪</span>
+            </div>
+            <p class="panel-subtitle">候选评分、天气上下文和履约节点集中展示。</p>
+          </div>
+
+          <div class="right-content">
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <div class="metric-label">今日在线农机</div>
+                <div class="metric-value" style="color: var(--ag-machine-blue)">42</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">当前履约率</div>
+                <div class="metric-value" style="color: var(--ag-crop-green)">94.8%</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">待派订单</div>
+                <div class="metric-value" style="color: var(--ag-primary-hover)">11</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">异常订单</div>
+                <div class="metric-value" style="color: var(--ag-risk-red)">3</div>
+              </div>
+            </div>
+
+            <article class="candidate-card">
+              <div class="candidate-header">
+                <span style="font-size: 13px; font-weight: 800; color: var(--ag-text-secondary)">智能推荐农机</span>
+                <span id="match-score" class="score-tag">94 分</span>
+              </div>
+              <div class="device-block">
+                <strong id="match-device">[雷沃重工 GF80] 冀T·88921</strong>
+                <span id="match-driver">机主：郭建军 · 距离地块：3.5 公里</span>
+              </div>
+              <div class="reason-list" id="match-reasons">
+                <span>车型高度匹配小麦抢收需求</span>
+                <span>机主近期好评率 99.2%</span>
+                <span>预计 26 分钟到达地块</span>
+              </div>
+              <button class="btn-primary" type="button">确认派给该机具</button>
+            </article>
+
+            <article class="weather-card">
+              <div class="candidate-header">
+                <strong style="font-size: 13px">天气与风险</strong>
+                <span id="risk-chip" class="status-chip badge-pending">低风险</span>
+              </div>
+              <p id="weather-copy">未来 6 小时降水概率较低，风速适合收割作业，可按计划派单。</p>
+              <div class="weather-grid">
+                <div class="weather-stat">
+                  <strong>24°C</strong>
+                  <span>温度</span>
+                </div>
+                <div class="weather-stat">
+                  <strong>18%</strong>
+                  <span>降水</span>
+                </div>
+                <div class="weather-stat">
+                  <strong>12km/h</strong>
+                  <span>风速</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="info-card">
+              <div class="candidate-header">
+                <strong style="font-size: 13px">订单详情</strong>
+                <span id="order-status" class="status-chip badge-pending">待派单</span>
+              </div>
+              <div class="field-row">
+                <span>订单</span>
+                <strong id="order-name">小麦抢收需求</strong>
+              </div>
+              <div class="field-row">
+                <span>地块</span>
+                <strong id="order-location">河北衡水冀州区</strong>
+              </div>
+              <div class="field-row">
+                <span>面积</span>
+                <strong id="order-area">350 亩</strong>
+              </div>
+            </article>
+
+            <article class="info-card">
+              <strong style="display: block; margin-bottom: 10px; font-size: 13px">履约节点</strong>
+              <div class="timeline" id="timeline">
+                <div class="timeline-item active">需求提报并验证通过 - 10:30</div>
+                <div class="timeline-item active">智能匹配机制已激活 - 10:32</div>
+                <div class="timeline-item">机主确认并接单签领 - 待进行</div>
+                <div class="timeline-item">设备进场并开始作业 - 待进行</div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const orders = {
+        1: {
+          score: "94 分",
+          scoreTone: "green",
+          device: "[雷沃重工 GF80] 冀T·88921",
+          driver: "机主：郭建军 · 距离地块：3.5 公里",
+          reasons: ["车型高度匹配小麦抢收需求", "机主近期好评率 99.2%", "预计 26 分钟到达地块"],
+          status: "待派单",
+          statusClass: "badge-pending",
+          risk: "低风险",
+          riskClass: "badge-pending",
+          weather: "未来 6 小时降水概率较低，风速适合收割作业，可按计划派单。",
+          name: "小麦抢收需求",
+          location: "河北衡水冀州区",
+          area: "350 亩",
+          timeline: ["需求提报并验证通过 - 10:30", "智能匹配机制已激活 - 10:32", "机主确认并接单签领 - 待进行", "设备进场并开始作业 - 待进行"],
+        },
+        2: {
+          score: "88 分",
+          scoreTone: "blue",
+          device: "[久保田 PRO100] 鲁N·32201",
+          driver: "机主：刘铁柱 · 距离地块：7.2 公里",
+          reasons: ["当前机具已到场", "预计剩余作业 1.5 小时", "线路稳定，暂无异常"],
+          status: "履约中",
+          statusClass: "badge-active",
+          risk: "正常",
+          riskClass: "badge-active",
+          weather: "目的地天气稳定，建议持续观察作业进度并等待完工回传。",
+          name: "玉米收割作业",
+          location: "山东德州临邑县",
+          area: "120 亩",
+          timeline: ["主管确认派单 - 09:20", "机主确认接单 - 09:28", "机手到达地块 - 10:05", "开始作业 - 10:18"],
+        },
+        3: {
+          score: "75 分",
+          scoreTone: "red",
+          device: "[极飞 XP2023] 植保无人机",
+          driver: "机主：小陈植保 · 正在尝试重新连接信号",
+          reasons: ["设备信号丢失 20 分钟", "建议准备替补无人机", "需主管确认是否改派"],
+          status: "异常回流",
+          statusClass: "badge-risk",
+          risk: "高风险",
+          riskClass: "badge-risk",
+          weather: "当前不是天气异常，主要风险来自设备离线，建议生成故障改派候选。",
+          name: "水稻无人机植保",
+          location: "河南新乡辉县",
+          area: "500 亩",
+          timeline: ["机主确认接单 - 08:50", "无人机起飞作业 - 09:22", "设备信号丢失 - 10:11", "订单回流异常池 - 10:31"],
+        },
+      };
+
+      function setScoreTone(el, tone) {
+        const colors = {
+          green: ["var(--ag-crop-green)", "var(--ag-crop-green-light)"],
+          blue: ["var(--ag-machine-blue)", "var(--ag-machine-blue-light)"],
+          red: ["var(--ag-risk-red)", "var(--ag-risk-red-light)"],
+        };
+        const [color, bg] = colors[tone] || colors.green;
+        el.style.color = color;
+        el.style.backgroundColor = bg;
+      }
+
+      function setChipClass(el, className) {
+        el.className = `status-chip ${className}`;
+      }
+
+      function renderOrder(orderId) {
+        const data = orders[orderId];
+        if (!data) return;
+
+        document.querySelectorAll(".order-card").forEach((card) => {
+          card.classList.toggle("selected", card.dataset.order === String(orderId));
+        });
+        document.querySelectorAll(".map-plot").forEach((plot) => plot.classList.remove("active"));
+        document.getElementById(`plot-${orderId}`)?.classList.add("active");
+
+        const score = document.getElementById("match-score");
+        score.textContent = data.score;
+        setScoreTone(score, data.scoreTone);
+        document.getElementById("match-device").textContent = data.device;
+        document.getElementById("match-driver").textContent = data.driver;
+        document.getElementById("match-reasons").innerHTML = data.reasons.map((item) => `<span>${item}</span>`).join("");
+
+        const orderStatus = document.getElementById("order-status");
+        orderStatus.textContent = data.status;
+        setChipClass(orderStatus, data.statusClass);
+        const riskChip = document.getElementById("risk-chip");
+        riskChip.textContent = data.risk;
+        setChipClass(riskChip, data.riskClass);
+
+        document.getElementById("weather-copy").textContent = data.weather;
+        document.getElementById("order-name").textContent = data.name;
+        document.getElementById("order-location").textContent = data.location;
+        document.getElementById("order-area").textContent = data.area;
+        document.getElementById("timeline").innerHTML = data.timeline
+          .map((item, index) => `<div class="timeline-item ${index < 2 || orderId !== 1 ? "active" : ""}">${item}</div>`)
+          .join("");
+      }
+
+      document.querySelectorAll(".order-card").forEach((card) => {
+        card.addEventListener("click", () => renderOrder(Number(card.dataset.order)));
+      });
+    </script>
+  </body>
+</html>

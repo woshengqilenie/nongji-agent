@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>主管调度端 v2 | 农机速配调度平台</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/legacy-compat.css" />
+  </head>
+  <body>
+    <div class="ag-app">
+      <header class="ag-header">
+        <div class="logo-area">
+          <div class="logo-icon">调</div>
+          <span class="logo-title">主管调度端 v2</span>
+        </div>
+        <nav class="nav-tabs header-nav">
+          <a class="nav-tab" href="../">总览</a>
+          <a class="nav-tab" href="../rent/">租赁端</a>
+          <a class="nav-tab" href="../machine/">农机端</a>
+          <a class="nav-tab active" href="./">主管端</a>
+          <a class="nav-tab" href="../atlas/">全域地图</a>
+          <a class="nav-tab" href="/ui/supervisor">旧版</a>
+        </nav>
+        <div class="operator-area"><span>麦浪网格风</span><span class="avatar">调</span></div>
+      </header>
+
+      <main class="page-shell">
+        <section id="supervisorMetrics" class="metric-grid"></section>
+
+        <section class="page-grid supervisor" style="margin-top: 16px">
+          <aside class="panel sidebar-stack">
+            <div class="panel-head">
+              <div>
+                <h3>调度队列</h3>
+              </div>
+              <button id="refreshOverviewBtn" class="btn secondary">刷新总控台</button>
+            </div>
+            <label class="field"><span>主管身份</span><select id="dispatcherSelect"></select></label>
+            <div id="queueTabs" class="toolbar"></div>
+            <div id="queueOrders" class="list-stack"></div>
+          </aside>
+
+          <section class="panel detail-stack">
+            <div class="panel-head">
+              <div>
+                <h3>订单调度详情</h3>
+              </div>
+            </div>
+            <div id="supervisorOrderSummary" class="note-box">请选择左侧订单。</div>
+            <div id="dispatchGuide" class="note-box dispatch-guide">待主管派单时，先点击“生成派单建议”，再点选候选机具卡片，最后点击“确认派给所选机具”。</div>
+            <div class="inline-actions">
+              <button id="proposeDispatchBtn" class="btn primary">生成派单建议</button>
+              <button id="confirmDispatchBtn" class="btn secondary">确认派给所选机具</button>
+              <button id="simulateStormBtn" class="btn warning">模拟目的地暴雨</button>
+              <button id="clearWeatherBtn" class="btn secondary">清除天气覆写</button>
+            </div>
+            <div class="inline-actions">
+              <button id="weatherHandleBtn" class="btn warning">天气自动处置</button>
+              <button id="faultHandleBtn" class="btn warning">故障改派建议</button>
+              <button id="resumeBtn" class="btn secondary">恢复继续作业</button>
+              <button id="refundBtn" class="btn danger">取消并退款</button>
+            </div>
+            <div id="dispatchResult" class="result-box"><pre>这里显示主管操作回执，不再展示原始 JSON。</pre></div>
+            <div>
+              <h3>AI 总控解读</h3>
+            </div>
+            <div class="inline-actions"><button id="supervisorAiExplainBtn" class="btn warning">生成 AI 解读</button></div>
+            <div id="supervisorAiInsight" class="result-box insight-box"><pre>点击按钮后，这里会显示大模型解读。</pre></div>
+            <div><h3>候选评分</h3><div id="candidateTable"></div></div>
+            <div><h3>订单轨迹</h3><div id="supervisorTimeline"></div></div>
+          </section>
+
+          <aside class="panel detail-stack">
+            <div><h3>最近动态</h3></div>
+            <div id="recentEvents" class="event-list"></div>
+            <div id="recentEventsPagination" class="pagination-bar"></div>
+          </aside>
+        </section>
+        <section class="supervisor-bottom-grid" style="margin-top: 16px">
+          <aside class="panel detail-stack">
+            <div><h3>区域热力</h3></div>
+            <div id="regionHeat" class="heat-list"></div>
+            <div id="regionHeatPagination" class="pagination-bar"></div>
+          </aside>
+          <aside class="panel detail-stack">
+            <div><h3>机主服务分</h3></div>
+            <div id="ownerRank" class="rank-list"></div>
+            <div id="ownerRankPagination" class="pagination-bar"></div>
+          </aside>
+        </section>
+        <section class="panel detail-stack" style="margin-top: 16px">
+          <div class="panel-head">
+            <div><h3>调度地图</h3></div>
+          </div>
+          <div class="map-shell compact">
+            <div class="map-tools"><button id="supervisorMapFullscreenBtn" class="btn secondary" type="button">全屏地图</button></div>
+            <div id="dispatchMapCanvas" class="map-canvas compact"></div>
+            <div id="dispatchMapPlaceholder" class="map-placeholder">请先在右上角“外部服务设置”里配置高德地图 Key。</div>
+          </div>
+          <div><h3>天气与异常上下文</h3><div id="weatherPanel" class="weather-box"><pre>选择订单后可查看天气建议。</pre></div></div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/ui/supervisor.js"></script>
+  </body>
+</html>
